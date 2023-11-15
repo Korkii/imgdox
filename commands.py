@@ -18,7 +18,7 @@ def find_url(out: str) -> list:
             
    
 def find_emails(out: str) -> list:
-    results = re.findall(r"[ .a-zA-Z]+|^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$", out.decode(), re.MULTILINE)
+    results = re.findall(r"^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$", out.decode(), re.MULTILINE)
     
     for i in range(len(results)):
         results[i] = "".join(results[i])
@@ -49,7 +49,7 @@ def basic_scan(s, f):
     
     cat= []
     exiftool = []
-    
+    strings = []
     
     
     urls = find_url(outStrings) + find_url(outExiftool)
@@ -63,12 +63,9 @@ def basic_scan(s, f):
             strings.append(find_in_out(str(outStrings),words[i]))
             exiftool.append(find_in_out(str(outExiftool),words[i]))
         
-    regex = r"^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$"
-    #matches2 = re.findall(regex,outStrings.decode(),re.MULTILINE)
 
-    decoded = outStrings.decode()
-    results = re.findall(regex, decoded, re.MULTILINE)
-    print("matches:", "".join(results[0]))
+
+
     click.secho("\nUrls Found: " ,fg="green")
     
     for i in urls:
