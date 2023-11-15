@@ -18,13 +18,12 @@ def find_url(out: str) -> list:
             
    
 def find_emails(out: str) -> list:
-    uls = re.findall(r'^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$', str(out))
+    results = re.findall(r"[ .a-zA-Z]+|^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$", out.decode(), re.MULTILINE)
     
-    for i in range(len(uls)):
-        uls[i]=uls[i].replace("'","").replace("\\n","")
+    for i in range(len(results)):
+        results[i] = "".join(results[i])
         
-    return uls
-   
+    return results
 def find_base64(out: str) -> list:
     uls = re.findall(r'^(?:([a-z0-9A-Z+\/]){4})*(?1)(?:(?1)==|(?1){2}=|(?1){3})$', str(out))
     
@@ -54,7 +53,7 @@ def basic_scan(s, f):
     
     
     urls = find_url(outStrings) + find_url(outExiftool)
-    emails = find_emails(outStrings) + find_url(outExiftool)
+    emails = find_emails(outStrings) + find_emails(outExiftool)
     click.echo(emails)
     for i in range(len(urls)):
         urls[i]=urls[i].replace("'","").replace("\\n","")
@@ -69,7 +68,6 @@ def basic_scan(s, f):
 
     decoded = outStrings.decode()
     results = re.findall(regex, decoded, re.MULTILINE)
-    print("decoded:", repr(decoded))
     print("matches:", "".join(results[0]))
     click.secho("\nUrls Found: " ,fg="green")
     
@@ -88,5 +86,5 @@ def basic_scan(s, f):
     
     click.secho("\nEmails found: ",fg="green")
     for i in emails:
-        for j in i:
-            click.secho(j, fg = "magenta")
+
+        click.secho(i, fg = "magenta")
