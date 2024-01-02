@@ -3,11 +3,12 @@ from os import system
 import subprocess
 import re
 
+import Constants
 from imgdox.CommandParser import print_list,print_strings
             
             
 def find_in_out(out: str,word: str) -> list:
-    uls = re.findall(re.escape(word)+r'(?:\w+|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(out))
+    uls = re.findall(FIND_WORD_REGEX_VALUE, str(out))
     
     for i in range(len(uls)):
         uls[i]=uls[i].replace("'","").replace("\\n","")
@@ -16,18 +17,18 @@ def find_in_out(out: str,word: str) -> list:
     
     
 def find_url(out: str) -> list:
-    return re.findall(r'http[s]?://(?:\w+|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(out))
+    return re.findall(FIND_URL_REGEX_VALUE, str(out))
             
    
 def find_emails(out: str) -> list:
-    results = re.findall(r"^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$", out.decode(), re.MULTILINE)
+    results = re.findall(FIND_EMAIL_REGEX_VALUE, out.decode(), re.MULTILINE)
     
     for i in range(len(results)):
         results[i] = "".join(results[i])
         
     return results
 def find_base64(out: str) -> list:
-    uls = re.findall(r'^(?:([a-z0-9A-Z+\/]){4})*(?1)(?:(?1)==|(?1){2}=|(?1){3})$', str(out))
+    uls = re.findall(FIND_BASE64_REGEX_VALUE, str(out))
     
     for i in range(len(uls)):
         uls[i]=uls[i].replace("'","").replace("\\n","")
