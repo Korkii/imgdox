@@ -26,6 +26,8 @@ def find_emails(out: str) -> list:
         results[i] = "".join(results[i])
         
     return results
+
+
 def find_base64(out: str) -> list:
     uls = findall(FIND_BASE64_REGEX_VALUE, str(out))
     
@@ -34,13 +36,15 @@ def find_base64(out: str) -> list:
         
     return uls
             
+
 def runCmd(cmdName: str, fileName: str) -> bytes:
     return check_command_output(cmdName+ " " + str(fileName), shell=True)
+
 
 @click.command()
 @click.option("--s", default="",required=False, help="List of words to look for. ( Seperated by a comma )")
 @click.option("--f", default="", required=True, help="File name.")
-@click.option("--o", default="", required=False, help="Output file.")
+# @click.option("--o", default="", required=False, help="Output file.")
 def basic_scan(s, f):
     
     words = s.split(",")
@@ -50,7 +54,7 @@ def basic_scan(s, f):
     outStrings = check_command_output("strings -n7 " + str(f), shell=True)
     outExiftool = check_command_output("exiftool " + str(f),shell=True)
     
-    cat= []
+
     exiftool = []
     strings = []
     
