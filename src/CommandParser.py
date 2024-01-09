@@ -8,7 +8,7 @@ def print_strings(listToParse: list,name: str):
             for occurrence in sublist:
                 secho(occurrence, fg = "magenta")
     else:
-        secho("\nNothing was found.", fg="red")
+        secho("\nSearched literals were not found.", fg="red")
     
 def print_list(listToParse: list,name: str):
     if listToParse:
@@ -16,5 +16,5 @@ def print_list(listToParse: list,name: str):
         for occurrence in listToParse:
              secho(occurrence, fg = "magenta")
     else:
-        secho("\nNothing was found.", fg="red")
+        secho(f"\n{name} were not found.", fg="red")
     
