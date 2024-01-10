@@ -62,11 +62,12 @@ def runCmd(cmdName: str, fileName: str) -> bytes:
     return check_command_output(cmdName+ " " + str(fileName), shell=True)
 
 
+
 @click.command()
+@click.option("--f", default="", required=True,prompt='File name', help="File name.")
 @click.option("--s", default="",required=False, help="List of words to look for. ( Seperated by a comma )")
-@click.option("--f", default="", required=True, help="File name.")
-# @click.option("--o", default="", required=False, help="Output file.")
-def basic_scan(s, f):
+
+def basic_scan(f,s):
     
     words = s.split(",")
     
@@ -74,7 +75,7 @@ def basic_scan(s, f):
     # Command Running
     outStrings = check_command_output("strings -n7 " + str(f), shell=True)
     outExiftool = check_command_output("exiftool " + str(f),shell=True)
-    #print(outStrings)
+
 
     exiftool = []
     strings = []
@@ -96,4 +97,6 @@ def basic_scan(s, f):
     print_strings(s,"Strings")
     print_list(urls,"URLs")
     print_list(emails,"Emails")
+
+
     generate_bit_planes(str(f))
