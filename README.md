@@ -12,3 +12,7 @@ The tool is written with Python, and it's being updated once in a while.
 * Easy to use!
 
 ## Video is yet to be added
+
+## Todo list:
+- [ ] Header Checker
+- [ ] Add zsteg support
