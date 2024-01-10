@@ -1,2 +1,9 @@
 tests/img.jpg
 tests/test.txt
+bin/
+lib/
+lib64/
+share/
+include/
+pyvenv.cfg
+output/

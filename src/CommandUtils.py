@@ -20,9 +20,9 @@ def generate_bit_planes(fileName):
     b, g, r = img_split(image)
     #bPlanes,gPlanes,rPlanes = []
     for i in range(7):
-        imwrite(f'output/b{i}.jpg',b^(1<<i))
-        imwrite(f'output/g{i}.jpg',g^(1<<i))
-        imwrite(f'output/r{i}.jpg',r^(1<<i))
+        imwrite(f'output/b{i}.jpg',b & (1<<i))
+        imwrite(f'output/g{i}.jpg',g & (1<<i))
+        imwrite(f'output/r{i}.jpg',r & (1<<i))
 
 
 
