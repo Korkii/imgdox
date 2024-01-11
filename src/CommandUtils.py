@@ -12,6 +12,14 @@ from cv2 import imread,imwrite
 
 
 def generate_bit_planes(fileName):
+    """
+    Generate bit planes images
+    
+    Keyword arguments:
+    fileName -- the img file name
+    """
+
+
     if not path.exists("output"):
         mkdir("output")
     else:
@@ -28,6 +36,13 @@ def generate_bit_planes(fileName):
 
            
 def find_in_out(out: str,word: str) -> list:
+    """
+    Find specific words in a str.
+    
+    Keyword arguments:
+    out -- the inputted text
+    word -- the word to look for in the text
+    """
     uls = re.findall(re.escape(word) + Constants.FIND_WORD_REGEX_VALUE, str(out))
     
     for i in range(len(uls)):
@@ -37,10 +52,22 @@ def find_in_out(out: str,word: str) -> list:
     
     
 def find_url(out: str) -> list:
+    """
+    Find URLs within a str.
+    
+    Keyword arguments:
+    out -- the inputted text
+    """
     return re.findall(Constants.FIND_URL_REGEX_VALUE, str(out))
             
    
 def find_emails(out: str) -> list:
+    """
+    Find emails within a str.
+    
+    Keyword arguments:
+    out -- the inputted text
+    """
     results = re.findall(Constants.FIND_EMAIL_REGEX_VALUE, out.decode(), re.MULTILINE)
     
     for i in range(len(results)):
@@ -50,6 +77,13 @@ def find_emails(out: str) -> list:
 
 
 def find_base64(out: str) -> list:
+        """
+    
+    Find Base64s within a str.
+    
+    Keyword arguments:
+    out -- the inputted text
+    """
     uls = re.findall(Constants.FIND_BASE64_REGEX_VALUE, str(out))
     
     for i in range(len(uls)):
