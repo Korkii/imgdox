@@ -6,6 +6,7 @@
 
 This project is all about steganography, while it was made for CTFs, it could be used for more.
 The tool is written with Python, and it's being updated once in a while.
+The tool itself is made for linux, and it won't work on anything else.
 
 * Search for keywords in metadata of images
 * Automatically finds emails, base64 encryptions, urls, and more.
